@@ -6,4 +6,13 @@
     <AssemblyName>Dolittle.Machine.Specifications.Events.Specs</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="../../Source/Events/Events.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dolittle.Runtime.Events" Version="2.*" />
+    <PackageReference Include="Dolittle.SDK" Version="2.*" />
+  </ItemGroup>
+
 </Project>
