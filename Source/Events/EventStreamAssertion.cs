@@ -19,15 +19,26 @@ namespace Dolittle.Machine.Specifications.Events
     public static class EventStreamAssertion
     {
         /// <summary>
-        /// 
+        /// Starts the Fluent Interface by establishing an Event sequence to assert against
         /// </summary>
-        /// <param name="eventSource">The <see cref="IEventSource" /> contains the events</param>
+        /// <param name="eventSource">The <see cref="IEventSource" /> containing the events to assert against</param>
         /// <typeparam name="T"><see cref="Type" /> of the <see cref="IEvent" /> that you wish to assert against</typeparam>
         /// <returns>An <see cref="EventSequenceAssertion{T}" /> scoped to your <see cref="IEvent" /> type</returns>
         public static EventSequenceAssertion<T> ShouldHaveEvent<T>(this IEventSource eventSource) where T : IEvent
         {
             var sequenceValidation = new EventSequenceAssertion<T>(eventSource.UncommittedEvents);
             return sequenceValidation;
+        }
+
+        /// <summary>
+        /// Asserts that the specified <see cref="IEvent" /> type is not present in the event stream
+        /// </summary>
+        /// <param name="eventSource">The <see cref="IEventSource" /> containing the events to assert against</param>
+        /// <typeparam name="T"><see cref="Type" /> of the <see cref="IEvent" /> that you wish to assert against</typeparam>
+        public static void ShouldNotHaveEvent<T>(this IEventSource eventSource) where T : IEvent
+        {
+            var present = eventSource.UncommittedEvents.Events.Select(_ => _.Event).OfType<T>().Any();
+            present.ShouldBeFalse();
         }
     } 
 }
