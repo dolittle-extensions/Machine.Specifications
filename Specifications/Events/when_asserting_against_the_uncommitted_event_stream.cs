@@ -23,6 +23,6 @@ namespace Dolittle.Machine.Specifications.Events
         It should_have_an_event_sequence_assertion_for_an_event = () => stream_for_an_event.ShouldBeOfExactType<EventSequenceAssertion<AnEvent>>();
         It should_have_an_event_sequence_assertion_for_another_event = () => stream_for_another_event.ShouldBeOfExactType<EventSequenceAssertion<AnotherEvent>>();
         It should_have_an_event_sequence_assertion_for_unused_event = () => stream_for_unused_event.ShouldBeOfExactType<EventSequenceAssertion<UnusedEvent>>();
-
+        It should_not_have_the_unused_event = () => aggregate_root.ShouldNotHaveEvent<UnusedEvent>();
     }
 }
