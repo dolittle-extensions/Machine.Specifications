@@ -37,5 +37,7 @@ namespace Dolittle.Machine.Specifications.MongoDB
         };
 
         It should_have_exported_the_file = () => docs.Count().ShouldEqual(3);
+
+        Cleanup the_file = () => File.Delete(temp_file);
     }    
 }
