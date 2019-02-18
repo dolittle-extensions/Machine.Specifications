@@ -11,7 +11,9 @@ using Mongo2Go;
 using MongoDB.Driver;
 using Machine.Specifications;
 using MongoDB.Bson.Serialization;
-
+using Dolittle.ReadModels.MongoDB;
+using Dolittle.ResourceTypes.Configuration;
+using Dolittle.ReadModels;
 namespace Dolittle.Machine.Specifications.MongoDB
 {
     /// <summary>
@@ -41,7 +43,10 @@ namespace Dolittle.Machine.Specifications.MongoDB
         /// </summary>
         protected static MongoClient client;
         
-
+        /// <summary>
+        /// An instance of the Configuration needed for a read model repository for this database
+        /// </summary>
+        protected static Dolittle.ReadModels.MongoDB.Configuration configuration_for_read_model_repository;
         Establish context = () => 
         {
             CreateDBConnection(Guid.NewGuid().ToString());
@@ -65,6 +70,7 @@ namespace Dolittle.Machine.Specifications.MongoDB
             connection_string = runner.ConnectionString; 
             client = new MongoClient(connection_string);
             database = client.GetDatabase(database_name);
+            configuration_for_read_model_repository = new Dolittle.ReadModels.MongoDB.Configuration(new FakeIConfigurationFor(connection_string,database_name));
         }
 
         /// <summary>
@@ -101,6 +107,28 @@ namespace Dolittle.Machine.Specifications.MongoDB
         {
             var content = File.ReadAllLines(fileName);
             return content.Select(s => BsonSerializer.Deserialize<T>(s)).ToList();
+        }
+
+        /// <summary>
+        /// Returns a MongoDB implemenation of <see cref="IReadModelRepositoryFor{T}"/> configured for this test database
+        /// </summary>
+        protected static Dolittle.ReadModels.MongoDB.ReadModelRepositoryFor<T> GetReadModelRepositoryFor<T>() where T : IReadModel
+        {
+            return new ReadModelRepositoryFor<T>(configuration_for_read_model_repository);
+        }
+
+        private class FakeIConfigurationFor : IConfigurationFor<ReadModelRepositoryConfiguration>
+        {
+            private readonly string connection_string;
+            private readonly string database;
+            
+            public FakeIConfigurationFor(string connection, string database_name)
+            {
+                connection_string = connection; 
+                database = database_name;
+            }
+
+            public ReadModelRepositoryConfiguration Instance => new ReadModelRepositoryConfiguration { ConnectionString = connection_string, Database = database };
         }
     }
 }
