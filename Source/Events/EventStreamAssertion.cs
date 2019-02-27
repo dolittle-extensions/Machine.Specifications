@@ -40,5 +40,24 @@ namespace Dolittle.Machine.Specifications.Events
             var present = eventSource.UncommittedEvents.Events.Select(_ => _.Event).OfType<T>().Any();
             present.ShouldBeFalse();
         }
-    } 
+        
+        /// <summary>
+        /// Asserts that the event stream does not contain any events
+        /// </summary>
+        /// <param name="eventSource">The <see cref="IEventSource" /> containing the events to assert against</param>
+        public static void ShouldHaveAnEmptyStream(this IEventSource eventSource)
+        {
+            eventSource.ShouldHaveEventCountOf(0);
+        }
+
+        /// <summary>
+        /// Asserts that the event stream does not contain any events
+        /// </summary>
+        /// <param name="eventSource">The <see cref="IEventSource" /> containing the events to assert against</param>
+        /// <param name="numberOfEvents">The number of events you wish to assert are present in the stream</param>
+        public static void ShouldHaveEventCountOf(this IEventSource eventSource, int numberOfEvents)
+        {
+            eventSource.UncommittedEvents.Events.Count().ShouldEqual(numberOfEvents);
+        }
+    }
 }
