@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="../../Build/MSBuild/default.props"></Import>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Dolittle.Machine.Specifications.Events</AssemblyName>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <PackageReference  Include="Dolittle.Runtime.Events" Version="3.*" />
+    <PackageReference Include="Dolittle.Common" Version="1.*" />
+    <PackageReference Include="Dolittle.Runtime.Events" Version="4.*" />
     <PackageReference Include="Machine.Specifications" Version="0.12.0" />
     <PackageReference Include="Machine.Specifications.Should" Version="0.11.0" />
   </ItemGroup>
