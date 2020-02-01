@@ -1,15 +1,12 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
- *  Licensed under the MIT License. See LICENSE in the project root for license information.
- * --------------------------------------------------------------------------------------------*/
-using System;
-using Machine.Specifications;
+// Copyright (c) Dolittle. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Dolittle.Machine.Specifications.Events
 {
+    using global::Machine.Specifications;
 
     [Subject("Asserting against the Uncommitted Event Stream")]
-    public class when_asserting_against_an_empty_uncommitted_event_stream 
+    public class when_asserting_against_an_empty_uncommitted_event_stream
     {
         static AnAggregateRoot aggregate_root;
         Because of = () => aggregate_root = new AnAggregateRoot(System.Guid.NewGuid());
@@ -17,6 +14,4 @@ namespace Dolittle.Machine.Specifications.Events
 
         It should_have_an_event_count_of_zero = () => aggregate_root.ShouldHaveEventCountOf(0);
     }
-
-    
 }

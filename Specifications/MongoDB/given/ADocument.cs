@@ -1,14 +1,11 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
- *  Licensed under the MIT License. See LICENSE in the project root for license information.
- * --------------------------------------------------------------------------------------------*/
-
-using System;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+// Copyright (c) Dolittle. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Dolittle.Machine.Specifications.MongoDB
 {
+    using System;
+    using global::MongoDB.Bson.Serialization.Attributes;
+
     public class ADocument
     {
         [BsonId]
@@ -17,7 +14,7 @@ namespace Dolittle.Machine.Specifications.MongoDB
         public string AString { get; set; }
 
         public int AnInt { get; set; }
-        
+
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime? ADateTimeUTC { get; set; }
 
@@ -25,6 +22,7 @@ namespace Dolittle.Machine.Specifications.MongoDB
         public DateTime? ADateTimeLocal { get; set; }
 
         public DateTimeOffset ADateTimeOffset { get; set; }
+
         public string[] AnArrayOfStrings { get; set; }
     }
 }

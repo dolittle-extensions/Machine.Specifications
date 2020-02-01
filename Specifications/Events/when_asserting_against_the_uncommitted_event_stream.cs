@@ -1,12 +1,10 @@
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
- *  Licensed under the MIT License. See LICENSE in the project root for license information.
- * --------------------------------------------------------------------------------------------*/
-using System;
-using Machine.Specifications;
+// Copyright (c) Dolittle. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Dolittle.Machine.Specifications.Events
 {
+    using global::Machine.Specifications;
+
     [Subject("Asserting against the Uncommitted Event Stream")]
     public class when_asserting_against_the_uncommitted_event_stream : an_aggregate_root_with_uncommitted_events
     {
@@ -14,7 +12,7 @@ namespace Dolittle.Machine.Specifications.Events
         static object stream_for_another_event;
         static object stream_for_unused_event;
 
-        Because of = () => 
+        Because of = () =>
         {
             stream_for_an_event = aggregate_root.ShouldHaveEvent<AnEvent>();
             stream_for_another_event = aggregate_root.ShouldHaveEvent<AnotherEvent>();
@@ -27,6 +25,4 @@ namespace Dolittle.Machine.Specifications.Events
         It should_not_have_the_unused_event = () => aggregate_root.ShouldNotHaveEvent<UnusedEvent>();
         It should_have_4_events = () => aggregate_root.ShouldHaveEventCountOf(4);
     }
-
-    
 }

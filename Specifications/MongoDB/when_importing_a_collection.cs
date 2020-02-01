@@ -1,19 +1,12 @@
-﻿/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
- *  Licensed under the MIT License. See LICENSE in the project root for license information.
- * --------------------------------------------------------------------------------------------*/
-
-using Machine.Specifications;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading;
-using MongoDB.Driver;
-using MongoDB.Driver.Linq;
-
+﻿// Copyright (c) Dolittle. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Dolittle.Machine.Specifications.MongoDB
 {
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using global::Machine.Specifications;
+    using global::MongoDB.Driver;
 
     [Subject(typeof(a_mongo_db_instance))]
     public class when_importing_a_collection : a_mongo_db_instance

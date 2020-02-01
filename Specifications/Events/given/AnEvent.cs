@@ -1,12 +1,10 @@
-﻿/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
- *  Licensed under the MIT License. See LICENSE in the project root for license information.
- * --------------------------------------------------------------------------------------------*/
-
-using Dolittle.Events;
+﻿// Copyright (c) Dolittle. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace Dolittle.Machine.Specifications.Events
 {
+    using Dolittle.Events;
+
     public class AnEvent : IEvent
     {
         public AnEvent(string aString, int anInt)
@@ -16,6 +14,7 @@ namespace Dolittle.Machine.Specifications.Events
         }
 
         public string AString { get; }
+
         public int AnInt { get; }
     }
 }
