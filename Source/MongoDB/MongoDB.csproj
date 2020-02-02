@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dolittle.Common" Version="2.*" />
-    <PackageReference Include="Mongo2Go" Version="2.2.9" />
+    <PackageReference Include="Mongo2Go" Version="2.2.12" />
     <PackageReference Include="MongoDB.Bson" Version="2.7.0"/>
     <PackageReference Include="MongoDB.Driver" Version="2.7.0"/>
     <PackageReference Include="MongoDB.Driver.Core" Version="2.7.0"/>
