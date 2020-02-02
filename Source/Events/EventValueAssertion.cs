@@ -1,38 +1,34 @@
-﻿/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Dolittle. All rights reserved.
- *  Licensed under the MIT License. See LICENSE in the project root for license information.
- * --------------------------------------------------------------------------------------------*/
+﻿// Copyright (c) Dolittle. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
-using System.Linq;
-using Machine.Specifications;
-using Dolittle.Runtime.Events;
-using Dolittle.Runtime.Events.Store;
 using Dolittle.Events;
-using System.Collections.Generic;
+using Machine.Specifications;
 
 namespace Dolittle.Machine.Specifications.Events
 {
     /// <summary>
-    /// Fluent interface element allowing assertions against a specific <see cref="IEvent" />
+    /// Fluent interface element allowing assertions against a specific <see cref="IEvent" />.
     /// </summary>
-    /// <typeparam name="T">The type of the <see cref="IEvent" /> you wish to assert against</typeparam>
-    public class EventValueAssertion<T> where T : IEvent
+    /// <typeparam name="T">The type of the <see cref="IEvent" /> you wish to assert against.</typeparam>
+    public class EventValueAssertion<T>
+        where T : IEvent
     {
         readonly T _event;
-        
+
         /// <summary>
-        /// Instantiates an instance of <see cref="EventValueAssertion{T}" /> with the <see cref="IEvent" /> to assert against
+        /// Initializes a new instance of the <see cref="EventValueAssertion{T}"/> class with the <see cref="IEvent" /> to assert against.
         /// </summary>
+        /// <param name="event">The event you wish to assert against.</param>
         public EventValueAssertion(T @event)
         {
             _event = @event;
         }
 
         /// <summary>
-        /// Asserts that the <see cref="IEvent" /> contains the specified values
+        /// Asserts that the <see cref="IEvent" /> contains the specified values.
         /// </summary>
-        /// <param name="expectedValues">A collection of values that you wish to assert should be present</param>
+        /// <param name="expectedValues">A collection of values that you wish to assert should be present.</param>
         public void WithValues(params Func<T, bool>[] expectedValues)
         {
             foreach (var expectedValue in expectedValues)
@@ -42,9 +38,9 @@ namespace Dolittle.Machine.Specifications.Events
         }
 
         /// <summary>
-        /// Asserts that the <see cref="IEvent" /> passes the specified assertions 
+        /// Asserts that the <see cref="IEvent" /> passes the specified assertions.
         /// </summary>
-        /// <param name="assertions">>A collection of assertions that you wish to perform</param>
+        /// <param name="assertions">>A collection of assertions that you wish to perform.</param>
         public void Where(params Action<T>[] assertions)
         {
             foreach (var assert in assertions)
@@ -52,5 +48,5 @@ namespace Dolittle.Machine.Specifications.Events
                 assert(_event);
             }
         }
-    } 
+    }
 }

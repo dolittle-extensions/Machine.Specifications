@@ -2,11 +2,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Dolittle.Machine.Specifications.MongoDB</AssemblyName>
+    <NoWarn>SA1201, SA1310, CA1823</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dolittle.Common" Version="1.*" />
-    <PackageReference Include="Mongo2Go" Version="2.2.9" />
+    <PackageReference Include="Dolittle.Common" Version="2.*" />
+    <PackageReference Include="Mongo2Go" Version="2.2.12" />
     <PackageReference Include="MongoDB.Bson" Version="2.7.0"/>
     <PackageReference Include="MongoDB.Driver" Version="2.7.0"/>
     <PackageReference Include="MongoDB.Driver.Core" Version="2.7.0"/>
