@@ -1,10 +1,11 @@
 // Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using Dolittle.Machine.Specifications.Events.given;
+using Machine.Specifications;
+
 namespace Dolittle.Machine.Specifications.Events
 {
-    using global::Machine.Specifications;
-
     [Subject("Asserting against the Uncommitted Event Stream")]
     public class when_asserting_against_an_empty_uncommitted_event_stream
     {

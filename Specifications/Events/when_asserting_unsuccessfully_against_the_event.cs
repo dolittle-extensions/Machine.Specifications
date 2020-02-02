@@ -1,11 +1,12 @@
 // Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+using Dolittle.Machine.Specifications.Events.given;
+using Machine.Specifications;
+
 namespace Dolittle.Machine.Specifications.Events
 {
-    using System;
-    using global::Machine.Specifications;
-
     [Subject("Asserting against the Uncommitted Event Stream")]
     public class when_asserting_unsuccessfully_against_the_event : an_aggregate_root_with_uncommitted_events
     {

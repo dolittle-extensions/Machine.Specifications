@@ -1,10 +1,10 @@
 // Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-namespace Dolittle.Machine.Specifications.Events
-{
-    using System;
-    using Dolittle.Domain;
+using System;
+using Dolittle.Domain;
 
+namespace Dolittle.Machine.Specifications.Events.given
+{
     public class AnAggregateRoot : AggregateRoot
     {
         public AnAggregateRoot(Guid id)

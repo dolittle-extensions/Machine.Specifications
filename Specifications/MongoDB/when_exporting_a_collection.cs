@@ -1,15 +1,16 @@
 // Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using Dolittle.Machine.Specifications.MongoDB.given;
+using Machine.Specifications;
+
 namespace Dolittle.Machine.Specifications.MongoDB
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Threading;
-    using global::Machine.Specifications;
-
     [Subject(typeof(a_mongo_db_instance))]
     public class when_exporting_a_collection : a_mongo_db_instance
     {
@@ -28,7 +29,11 @@ namespace Dolittle.Machine.Specifications.MongoDB
                 ADateTimeUTC = DateTime.UtcNow,
                 ADateTimeLocal = DateTime.Now,
                 ADateTimeOffset = DateTimeOffset.UtcNow,
-                AnArrayOfStrings = new[] { "strange","women","lying","in","ponds","distributing","swords","is","no","basis","for","a","system","of","government" },
+                AnArrayOfStrings = new[]
+                {
+                    "strange", "women", "lying", "in", "ponds", "distributing", "swords", "is", "no", "basis", "for",
+                    "a", "system", "of", "government"
+                },
             };
 
             var secondDoc = new ADocument
@@ -39,7 +44,10 @@ namespace Dolittle.Machine.Specifications.MongoDB
                 ADateTimeUTC = DateTime.UtcNow,
                 ADateTimeLocal = DateTime.Now,
                 ADateTimeOffset = DateTimeOffset.UtcNow,
-                AnArrayOfStrings = new[] { "supreme","executive","power","derives","from","a","mandate","from","the","masses" },
+                AnArrayOfStrings = new[]
+                {
+                    "supreme", "executive", "power", "derives", "from", "a", "mandate", "from", "the", "masses"
+                },
             };
 
             var thirdDoc = new ADocument
@@ -50,16 +58,19 @@ namespace Dolittle.Machine.Specifications.MongoDB
                 ADateTimeUTC = DateTime.UtcNow,
                 ADateTimeLocal = DateTime.Now,
                 ADateTimeOffset = DateTimeOffset.UtcNow,
-                AnArrayOfStrings = new[] { "not","some","farcical","aquatic","ceremony" },
+                AnArrayOfStrings = new[]
+                {
+                    "not", "some", "farcical", "aquatic", "ceremony"
+                },
             };
 
             var collection = database.GetCollection<ADocument>(collection_name);
-            collection.InsertMany(new[]{ firstDoc, secondDoc, thirdDoc });
+            collection.InsertMany(new[] { firstDoc, secondDoc, thirdDoc });
         };
 
         Because of = () =>
         {
-            Export<ADocument>(temp_file,collection_name);
+            Export<ADocument>(temp_file, collection_name);
             var exported_contents = File.ReadAllLines(temp_file);
             Thread.Sleep(500);
             read_from_export = ParseFile<ADocument>(temp_file);

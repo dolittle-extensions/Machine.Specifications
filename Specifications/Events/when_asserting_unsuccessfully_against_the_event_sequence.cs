@@ -1,15 +1,14 @@
 // Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 // ReSharper disable CA1707
+
+using System;
+using Dolittle.Machine.Specifications.Events.given;
+using Machine.Specifications;
+
 namespace Dolittle.Machine.Specifications.Events
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using global::Machine.Specifications;
-
     [Subject("Asserting against the Uncommitted Event Stream")]
-    [SuppressMessage("ReSharper", "SA1400", Justification = "Spec")]
-    [SuppressMessage("ReSharper", "CA1707", Justification = "Spec")]
     public class when_asserting_unsuccessfully_against_the_event_sequence : an_aggregate_root_with_uncommitted_events
     {
         static Exception an_event_is_not_in_the_stream;

@@ -1,15 +1,13 @@
 // Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-// ReSharper disable RCS1018
-// ReSharper disable SA1400
-// ReSharper disable SA1309
+using System;
+using Dolittle.Machine.Specifications.MongoDB.given;
+using Dolittle.ReadModels;
+using Machine.Specifications;
+
 namespace Dolittle.Machine.Specifications.MongoDB
 {
-    using System;
-    using Dolittle.ReadModels;
-    using global::Machine.Specifications;
-
     [Subject(typeof(a_mongo_db_instance))]
     public class when_fetching_a_document_by_id : a_mongo_db_instance
     {

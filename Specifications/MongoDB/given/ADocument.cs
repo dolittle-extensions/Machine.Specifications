@@ -1,11 +1,11 @@
 // Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace Dolittle.Machine.Specifications.MongoDB
-{
-    using System;
-    using global::MongoDB.Bson.Serialization.Attributes;
+using System;
+using MongoDB.Bson.Serialization.Attributes;
 
+namespace Dolittle.Machine.Specifications.MongoDB.given
+{
     public class ADocument
     {
         [BsonId]

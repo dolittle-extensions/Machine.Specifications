@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Dolittle.Machine.Specifications.MongoDB</AssemblyName>
+    <NoWarn>SA1201, SA1310, CA1823</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,14 +1,15 @@
 // Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using Machine.Specifications;
+
 namespace Dolittle.Machine.Specifications.MongoDB
 {
-    using global::Machine.Specifications;
-
     [Subject(typeof(a_mongo_db_instance))]
     public class when_running_a_spec_against_mongo_with_a_specified_database_name : a_mongo_db_instance
     {
         static string my_db_name = "my_db";
+
         Establish context = () =>
         {
             CreateDBConnection(my_db_name);

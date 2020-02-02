@@ -1,10 +1,11 @@
 // Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
-namespace Dolittle.Machine.Specifications.Events
-{
-    using System;
-    using global::Machine.Specifications;
 
+using System;
+using Machine.Specifications;
+
+namespace Dolittle.Machine.Specifications.Events.given
+{
     public class an_aggregate_root_with_uncommitted_events
     {
         protected static AnAggregateRoot aggregate_root;

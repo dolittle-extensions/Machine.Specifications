@@ -1,6 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="../../Build/MSBuild/specs.props"></Import>
-
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Dolittle.Machine.Specifications.MongoDB.Specs</AssemblyName>
@@ -13,9 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dolittle.Common.Specs" Version="2.*"/>
     <PackageReference Include="Mongo2Go" Version="2.2.9" />
     <PackageReference Include="MongoDB.Bson" Version="2.7.3" />
     <PackageReference Include="MongoDB.Driver" Version="2.7.3" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.7.3" />
+    <PackageReference Include="Machine.Specifications.Runner.VisualStudio" Version="2.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
   </ItemGroup>
 </Project>
