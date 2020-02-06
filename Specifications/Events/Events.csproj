@@ -1,4 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../specs.props"/>
+
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Dolittle.Machine.Specifications.Events.Specs</AssemblyName>
@@ -11,9 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dolittle.Common.Specs" Version="2.*" />
-    <PackageReference Include="Dolittle.SDK" Version="4.*" />
-    <PackageReference Include="Machine.Specifications.Runner.VisualStudio" Version="2.9.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="Dolittle.SDK" Version="$(SDKVersion)" />
   </ItemGroup>
 </Project>
