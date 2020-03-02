@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Dolittle. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Collections.Generic;
 using System.Linq;
 using Dolittle.Events;
-using Dolittle.Runtime.Events;
 using Machine.Specifications;
 
 namespace Dolittle.Machine.Specifications.Events
@@ -17,17 +15,15 @@ namespace Dolittle.Machine.Specifications.Events
     public class EventSequenceAssertion<T>
         where T : IEvent
     {
-        readonly IEnumerable<IEvent> _events;
-        readonly IEnumerable<VersionedEvent> _versionedEvents;
+        readonly UncommittedAggregateEvents _events;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventSequenceAssertion{T}"/> class.
         /// </summary>
         /// <param name="stream">The instance of the <see cref="UncommittedEvents" /> to assert against.</param>
-        public EventSequenceAssertion(UncommittedEvents stream)
+        public EventSequenceAssertion(UncommittedAggregateEvents stream)
         {
-            _events = stream?.Events.Select(_ => _.Event).ToList() ?? new List<IEvent>();
-            _versionedEvents = stream?.Events.ToList() ?? new List<VersionedEvent>();
+            _events = stream;
         }
 
         /// <summary>
@@ -47,7 +43,7 @@ namespace Dolittle.Machine.Specifications.Events
         /// <returns>An EventValueAssertion{T} to allow assertions against the <see cref="IEvent" /> instance.</returns>
         public EventValueAssertion<T> AtBeginning()
         {
-            var @event = _events.FirstOrDefault();
+            var @event = _events[0];
             @event.ShouldNotBeNull();
             @event.ShouldBeOfExactType<T>();
             return new EventValueAssertion<T>((T)@event);
@@ -59,7 +55,7 @@ namespace Dolittle.Machine.Specifications.Events
         /// <returns>An EventValueAssertion{T} to allow assertions against the <see cref="IEvent" /> instance.</returns>
         public EventValueAssertion<T> AtEnd()
         {
-            var @event = _events.LastOrDefault();
+            var @event = _events[^1];
             @event.ShouldNotBeNull();
             @event.ShouldBeOfExactType<T>();
             return new EventValueAssertion<T>((T)@event);
@@ -72,7 +68,8 @@ namespace Dolittle.Machine.Specifications.Events
         /// <returns>An EventValueAssertion{T} to allow assertions against the <see cref="IEvent" /> instance.</returns>
         public EventValueAssertion<T> AtSequenceNumber(uint sequenceNumber)
         {
-            var @event = _versionedEvents.SingleOrDefault(_ => _.Version.Sequence == sequenceNumber)?.Event;
+            sequenceNumber.ShouldBeLessThan(_events.Count);
+            var @event = _events[(int)sequenceNumber];
             @event.ShouldNotBeNull();
             @event.ShouldBeOfExactType<T>();
             return new EventValueAssertion<T>((T)@event);

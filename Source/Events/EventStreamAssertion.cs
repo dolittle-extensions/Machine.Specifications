@@ -3,24 +3,24 @@
 
 using System;
 using System.Linq;
+using Dolittle.Domain;
 using Dolittle.Events;
-using Dolittle.Runtime.Events;
 using Machine.Specifications;
 
 namespace Dolittle.Machine.Specifications.Events
 {
     /// <summary>
-    /// Start of the fluent interface for asserting against <see cref="UncommittedEvents" /> of an <see cref="IEventSource" />.
+    /// Start of the fluent interface for asserting against uncommitted events of an <see cref="AggregateRoot" />.
     /// </summary>
     public static class EventStreamAssertion
     {
         /// <summary>
         /// Starts the Fluent Interface by establishing an Event sequence to assert against.
         /// </summary>
-        /// <param name="eventSource">The <see cref="IEventSource" /> containing the events to assert against.</param>
+        /// <param name="eventSource">The <see cref="AggregateRoot" /> containing the events to assert against.</param>
         /// <typeparam name="T"><see cref="Type" /> of the <see cref="IEvent" /> that you wish to assert against.</typeparam>
         /// <returns>An <see cref="EventSequenceAssertion{T}" /> scoped to your <see cref="IEvent" /> type.</returns>
-        public static EventSequenceAssertion<T> ShouldHaveEvent<T>(this IEventSource eventSource)
+        public static EventSequenceAssertion<T> ShouldHaveEvent<T>(this AggregateRoot eventSource)
             where T : IEvent
         {
             var sequenceValidation = new EventSequenceAssertion<T>(eventSource.UncommittedEvents);
@@ -30,20 +30,20 @@ namespace Dolittle.Machine.Specifications.Events
         /// <summary>
         /// Asserts that the specified <see cref="IEvent" /> type is not present in the event stream.
         /// </summary>
-        /// <param name="eventSource">The <see cref="IEventSource" /> containing the events to assert against.</param>
+        /// <param name="eventSource">The <see cref="AggregateRoot" /> containing the events to assert against.</param>
         /// <typeparam name="T"><see cref="Type" /> of the <see cref="IEvent" /> that you wish to assert against.</typeparam>
-        public static void ShouldNotHaveEvent<T>(this IEventSource eventSource)
+        public static void ShouldNotHaveEvent<T>(this AggregateRoot eventSource)
             where T : IEvent
         {
-            var present = eventSource.UncommittedEvents.Events.Select(_ => _.Event).OfType<T>().Any();
+            var present = eventSource.UncommittedEvents.OfType<T>().Any();
             present.ShouldBeFalse();
         }
 
         /// <summary>
         /// Asserts that the event stream does not contain any events.
         /// </summary>
-        /// <param name="eventSource">The <see cref="IEventSource" /> containing the events to assert against.</param>
-        public static void ShouldHaveAnEmptyStream(this IEventSource eventSource)
+        /// <param name="eventSource">The <see cref="AggregateRoot" /> containing the events to assert against.</param>
+        public static void ShouldHaveAnEmptyStream(this AggregateRoot eventSource)
         {
             eventSource.ShouldHaveEventCountOf(0);
         }
@@ -51,11 +51,11 @@ namespace Dolittle.Machine.Specifications.Events
         /// <summary>
         /// Asserts that the event stream does not contain any events.
         /// </summary>
-        /// <param name="eventSource">The <see cref="IEventSource" /> containing the events to assert against.</param>
+        /// <param name="eventSource">The <see cref="AggregateRoot" /> containing the events to assert against.</param>
         /// <param name="numberOfEvents">The number of events you wish to assert are present in the stream.</param>
-        public static void ShouldHaveEventCountOf(this IEventSource eventSource, int numberOfEvents)
+        public static void ShouldHaveEventCountOf(this AggregateRoot eventSource, int numberOfEvents)
         {
-            eventSource.UncommittedEvents.Events.Count().ShouldEqual(numberOfEvents);
+            eventSource.UncommittedEvents.Count.ShouldEqual(numberOfEvents);
         }
     }
 }
