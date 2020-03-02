@@ -1,7 +1,7 @@
 <Project>
     <PropertyGroup>
-        <SDKVersion>4.*</SDKVersion>
-        <RuntimeVersion>4.*</RuntimeVersion>
-        <FundamentalsVersion>4.*</FundamentalsVersion>
+        <SDKVersion>5.0.0-alpha*</SDKVersion>
+        <FundamentalsVersion>5.0.0-alpha*</FundamentalsVersion>
+        <ReadModelsMongoDB>5.0.0-alpha*</ReadModelsMongoDB>
     </PropertyGroup>
 </Project>
